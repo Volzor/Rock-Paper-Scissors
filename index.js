@@ -1,4 +1,4 @@
-const choicesArray = ['Rock', 'Paper', 'Scissors'];
+const choicesArray = ['rock', 'paper', 'scissors'];
 
 // function that chooses a random index from the choicesArray and logs the value of that index
 const getComputerChoice = () => {
@@ -6,41 +6,55 @@ const getComputerChoice = () => {
     return randomSelection;
 };
 
+const playerChoice = () => {
+    let input = prompt('Type rock, paper, or scissors');
+    return input;
+}; 
 
+let playerWins = 0;
+let computerWins = 0;
 
-// function that takes player choice and compares it to the random computer choice using else if statement
-const playRound = (playerSelection, compSelection) => {
-    if (playerSelection == 'Rock' && compSelection == 'Scissors') {
+// function that takes player choice and compares it to the random computer choice using else if statement (can be refactored)
+const checkWinner = (playerSelection, compSelection) => {
+    if (playerSelection == 'rock' && compSelection == 'scissors') {
+        playerWins++
         return `Player wins! ${playerSelection} beats ${compSelection}`
-    } else if (playerSelection == 'Scissors' && compSelection == 'Rock') {
+    } else if (playerSelection == 'scissors' && compSelection == 'rock') {
+        computerWins++
         return `Computer wins! ${compSelection} beats ${playerSelection}`
-    } else if (playerSelection == 'Paper' && compSelection == 'Rock') {
+    } else if (playerSelection == 'paper' && compSelection == 'rock') {
+        playerWins++
         return `Player wins! ${playerSelection} beats ${compSelection}`
-    } else if (playerSelection == 'Rock' && compSelection == 'Paper') {
+    } else if (playerSelection == 'rock' && compSelection == 'paper') {
+        computerWins++
         return `Computer wins! ${compSelection} beats ${playerSelection}` 
-    } else if (playerSelection == 'Scissors' && compSelection == 'Paper') {
+    } else if (playerSelection == 'scissors' && compSelection == 'paper') {
+        playerWins++
         return `Player wins! ${playerSelection} beats ${compSelection}` 
-    } else if (playerSelection == 'Paper' && compSelection == 'Scissors') {
+    } else if (playerSelection == 'paper' && compSelection == 'scissors') {
+        computerWins++
         return `Computer wins! ${compSelection} beats ${playerSelection}`
      } else if (playerSelection == compSelection) {
         return 'Tie!'
     };
 };
 
-// assign user and computer choices to a variable
-const compSelection = getComputerChoice();
-const playerSelection = 'Rock';
-
-
-// creates a for loop to make rounds which will be logged to the console
+// creates a for loop to make 5 rounds which will log the winner to the console
 const game = () => {
-    console.log('5 rounds of fun begin now!')
+    console.log('5 rounds of fun begin now!');
+    let roundsWon = 0;
     for (let i = 0; i < 5; i++) {
-        const playerSelection = 'Rock';
+        const playerSelection = playerChoice();
         const compSelection = getComputerChoice();
-        console.log(playRound(playerSelection, compSelection));
-    }
-};
-game();
+        let result = checkWinner(playerSelection, compSelection);
+        console.log(result)
+    };
+     if (playerWins > computerWins) {
+        console.log('PLAYER WINS!')
+     } else {
+        console.log('COMPUTER WINS!')
+     }
+}
+
 
 
