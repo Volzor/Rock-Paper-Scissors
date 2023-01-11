@@ -9,7 +9,7 @@ const getComputerChoice = () => {
 const playerChoice = () => {
     let input = prompt('Type rock, paper, or scissors');
     return input;
-}; 
+}
 
 let playerWins = 0;
 let computerWins = 0;
@@ -42,8 +42,7 @@ const checkWinner = (playerSelection, compSelection) => {
 // creates a for loop to make 5 rounds which will log the winner to the console
 const game = () => {
     console.log('5 rounds of fun begin now!');
-    let roundsWon = 0;
-    for (let i = 0; i < 5; i++) {
+
         const playerSelection = playerChoice();
         const compSelection = getComputerChoice();
         let result = checkWinner(playerSelection, compSelection);
@@ -54,7 +53,7 @@ const game = () => {
      } else {
         console.log('COMPUTER WINS!')
      }
-}
+game()
 
 
 
