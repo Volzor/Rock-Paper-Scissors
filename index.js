@@ -1,59 +1,68 @@
+// global variables
+const container = document.querySelector('.container');
+const buttons = document.querySelectorAll('button');
+const scissors = document.getElementById('scissors');
+const rock = document.getElementById('rock');
+const paper = document.getElementById('paper');
 const choicesArray = ['rock', 'paper', 'scissors'];
 
-// function that chooses a random index from the choicesArray and logs the value of that index
-const getComputerChoice = () => {
-    const randomSelection = choicesArray[Math.floor(Math.random() * choicesArray.length)];
-    return randomSelection;
+// score scount
+let playerScore = 0;
+let computerScore = 0;
+
+
+
+// randomized computer choice from choices array
+function getComputerChoice() {
+    return choicesArray[Math.floor(Math.random() * choicesArray.length)];
 };
 
-const playerChoice = () => {
+
+// prompts user for a choice of rock, paper, or scissors
+function getPlayerChoice() {
     let input = prompt('Type rock, paper, or scissors');
+    input = input.toLowerCase();
     return input;
-}
+};
 
-let playerWins = 0;
-let computerWins = 0;
 
-// function that takes player choice and compares it to the random computer choice using else if statement (can be refactored)
-const checkWinner = (playerSelection, compSelection) => {
-    if (playerSelection == 'rock' && compSelection == 'scissors') {
-        playerWins++
-        return `Player wins! ${playerSelection} beats ${compSelection}`
-    } else if (playerSelection == 'scissors' && compSelection == 'rock') {
-        computerWins++
-        return `Computer wins! ${compSelection} beats ${playerSelection}`
-    } else if (playerSelection == 'paper' && compSelection == 'rock') {
-        playerWins++
-        return `Player wins! ${playerSelection} beats ${compSelection}`
-    } else if (playerSelection == 'rock' && compSelection == 'paper') {
-        computerWins++
-        return `Computer wins! ${compSelection} beats ${playerSelection}` 
-    } else if (playerSelection == 'scissors' && compSelection == 'paper') {
-        playerWins++
-        return `Player wins! ${playerSelection} beats ${compSelection}` 
-    } else if (playerSelection == 'paper' && compSelection == 'scissors') {
-        computerWins++
-        return `Computer wins! ${compSelection} beats ${playerSelection}`
-     } else if (playerSelection == compSelection) {
-        return 'Tie!'
+// plays a single round of rps
+function playRound(playerSelection, computerSelection) {
+
+    // else if statements to compare user choice to computer selection and return winner or tie
+     if (playerSelection === 'rock' && computerSelection === 'scissors') {
+            playerScore++
+            return `Player wins the round! ${playerSelection} beats ${computerSelection}`
+        } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
+            computerScore++
+            return `Computer wins the round! ${computerSelection} beats ${playerSelection}`
+        } else if (playerSelection === 'paper' && computerSelection === 'rock') {
+            playerScore++
+            return `Player wins the round! ${playerSelection} beats ${computerSelection}`
+        } else if (playerSelection === 'rock' && computerSelection === 'paper') {
+            computerScore++
+            return `Computer wins the round! ${computerSelection} beats ${playerSelection}` 
+        } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+            playerScore++
+            return `Player wins the round! ${playerSelection} beats ${computerSelection}` 
+        } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+            computerScore++
+            return `Computer wins the round! ${computerSelection} beats ${playerSelection}`
+        } else if (playerSelection == computerSelection) {
+            return 'Tie!'
     };
 };
 
-// creates a for loop to make 5 rounds which will log the winner to the console
-const game = () => {
-    console.log('5 rounds of fun begin now!');
 
-        const playerSelection = playerChoice();
-        const compSelection = getComputerChoice();
-        let result = checkWinner(playerSelection, compSelection);
-        console.log(result)
-    };
-     if (playerWins > computerWins) {
-        console.log('PLAYER WINS!')
-     } else {
-        console.log('COMPUTER WINS!')
-     }
-game()
-
-
-
+// plays game once and declares a game winner
+function game() {
+    console.log(playRound(getPlayerChoice(), getComputerChoice()))
+    // displays overall winner
+    if (playerScore > computerScore) {
+        return 'Player wins the game!'
+    } else if (playerScore < computerScore) {
+        return 'Computer wins the game!'
+    } else if (playerScore === computerScore) {
+        return 'It\s a tie!'
+    } 
+};
