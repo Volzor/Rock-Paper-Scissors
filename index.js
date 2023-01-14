@@ -4,6 +4,7 @@ const buttons = document.querySelectorAll('button');
 const scissors = document.getElementById('scissors');
 const rock = document.getElementById('rock');
 const paper = document.getElementById('paper');
+const declareWinner = document.getElementById('declare-winner');
 const choicesArray = ['rock', 'paper', 'scissors'];
 
 // score scount
@@ -59,10 +60,12 @@ function game() {
     console.log(playRound(getPlayerChoice(), getComputerChoice()))
     // displays overall winner
     if (playerScore > computerScore) {
-        return 'Player wins the game!'
+        declareWinner.innerText = 'Player wins the game!'
     } else if (playerScore < computerScore) {
-        return 'Computer wins the game!'
+        declareWinner.innerText = 'Computer wins the game!'
     } else if (playerScore === computerScore) {
-        return 'It\s a tie!'
+        declareWinner.innerText = 'It\s a tie!'
     } 
 };
+
+
